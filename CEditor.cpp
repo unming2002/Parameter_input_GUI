@@ -6,6 +6,8 @@ CEditor::CEditor(QWidget *parent)
 {
 	ui.setupUi(this);
 
+    //ui.treeWidget->setWindowTitle(QStringList() << "Key");
+
 	#pragma region Header setting
 	{
 		ui.treeWidget->setHeaderLabels(QStringList() << "Key" << "Value");

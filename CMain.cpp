@@ -1,5 +1,6 @@
 #include "CMain.h"
 #include "NodeUltrapica.h"
+#include "NodeUltraUtility.h"
 
 #include <QFile>
 #include <QFileDialog>
@@ -18,7 +19,7 @@ CMain::CMain(QWidget *parent)
 
 	// Groupped nodes
 	{
-        m_mapGroups["UltraUtility"] = { new CGroupNode("UltraUtility", m_pRootNode),ui.butUtility };
+        m_mapGroups["ultrautility"] = { new CUltraUtility(m_pRootNode),ui.butUtility };
 
         m_mapGroups["ultrapica"] = { new CUltrapica(m_pRootNode), ui.butPICA };
 		

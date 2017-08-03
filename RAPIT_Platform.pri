@@ -11,7 +11,8 @@ HEADERS += ./CTreeNodes.h \
     ./NodeUltrapica.h \
     ./CMain.h \
     ./CTreeModel.h \
-    ./CEditor.h
+    ./CEditor.h \
+    $$PWD/NodeUltraUtility.h
 SOURCES += ./CEditor.cpp \
     ./CMain.cpp \
     ./CTreeModel.cpp \
