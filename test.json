@@ -1,0 +1,114 @@
+{
+    "p3_multiphysics": {
+        "UNIC-A Unified CFD": {
+        },
+        "UltraChemRateMod": {
+        },
+        "UltraFluMod": {
+        },
+        "UltraProfiling": {
+        },
+        "UltraSPARATS": {
+        },
+        "ultraflumod": {
+        },
+        "ultrapica": {
+            "external_field": {
+                "applied_voltage": {
+                    "amplitude_V": 110,
+                    "radio_frequency_Hz": 13560000
+                },
+                "gravity": {
+                    "enable": false,
+                    "gx": 0,
+                    "gy": 0,
+                    "gz": -9.8000000000000007
+                },
+                "magnetic_field": {
+                    "Bx": 0,
+                    "By": 0,
+                    "Bz": 0,
+                    "enable": false,
+                    "unit": "Gauss"
+                }
+            },
+            "grid_system": {
+                "auto_generate_hex_structure_grid": {
+                    "boundary_settings": [
+                    ],
+                    "dx": 0.00020000000000000001,
+                    "dy": 0.00020000000000000001,
+                    "dz": 0.00020000000000000001,
+                    "enable": false,
+                    "nx": 101,
+                    "ny": 2,
+                    "nz": 2
+                },
+                "boundary_table": [
+                ],
+                "geometry": "2D",
+                "meshfile": "",
+                "reference_cell_volume": 9.9999999999999998e-13,
+                "scale": 1
+            },
+            "interpolation": {
+                "particle_to_cell": "inversed_cartesian_volume"
+            },
+            "mcc_setting": {
+                "collision_group": [
+                    {
+                        "channels": [
+                        ],
+                        "reactant": [
+                        ]
+                    }
+                ],
+                "enable": true,
+                "number_of_relaxing_cycle": 1,
+                "selected_pair": "All"
+            },
+            "monitor_options": {
+                "check_kinetic_energy": false,
+                "debug_mode": false,
+                "delta_cycle_of_restart_output": 50,
+                "number_of_cycle_per_file_out": 2,
+                "number_of_file_out_per_cycle": 20,
+                "number_of_step_per_monitor_out": 20,
+                "sampling_cycle_size": 20
+            },
+            "parallel_computing": {
+                "loading_balance_factor": 1.0249999999999999,
+                "loading_balance_method": "mixed",
+                "partition_domain": "particle"
+            },
+            "particle_settings": {
+                "maximum_particle_size": 1000000,
+                "particle_scaling_factor": 1.2
+            },
+            "poisson": {
+                "boundary": [
+                ],
+                "boundary_table": "BC.inp",
+                "fvm_scheme": "Implicit",
+                "geometry": "2D",
+                "meshfile": "Grid.uns",
+                "pc_type": "PETSC_PCAMG",
+                "relative_tolerance": 9.9999999999999995e-07,
+                "update_permittivity": false
+            },
+            "species": {
+                "initial": [
+                ],
+                "molecule": [
+                ]
+            },
+            "time_step_setup": {
+                "delta_t_s": 9.9999999999999998e-13,
+                "restart_tag": 0,
+                "time_shift_s": 0,
+                "total_cycles": 10,
+                "total_steps": 10000
+            }
+        }
+    }
+}
