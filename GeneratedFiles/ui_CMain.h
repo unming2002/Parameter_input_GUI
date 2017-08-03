@@ -38,11 +38,11 @@ public:
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QHBoxLayout *horizontalLayout;
-    QPushButton *butFluMod;
-    QPushButton *butSPARATS;
-    QPushButton *butNSMod;
+    QPushButton *butUtility;
     QPushButton *butPICA;
-    QPushButton *butUNIC;
+    QPushButton *butSPARATS;
+    QPushButton *butFluMod;
+    QPushButton *butNSMod;
     QPushButton *butProfiling;
     QPushButton *butChemRateMod;
 
@@ -99,53 +99,54 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+
         butFluMod = new QPushButton(scrollAreaWidgetContents);
         butFluMod->setObjectName(QStringLiteral("butFluMod"));
         butFluMod->setMinimumSize(QSize(200, 200));
         butFluMod->setMaximumSize(QSize(200, 200));
 
-        horizontalLayout->addWidget(butFluMod);
 
         butSPARATS = new QPushButton(scrollAreaWidgetContents);
         butSPARATS->setObjectName(QStringLiteral("butSPARATS"));
         butSPARATS->setMinimumSize(QSize(200, 200));
         butSPARATS->setMaximumSize(QSize(200, 200));
 
-        horizontalLayout->addWidget(butSPARATS);
 
         butNSMod = new QPushButton(scrollAreaWidgetContents);
         butNSMod->setObjectName(QStringLiteral("butNSMod"));
         butNSMod->setMinimumSize(QSize(200, 200));
         butNSMod->setMaximumSize(QSize(200, 200));
 
-        horizontalLayout->addWidget(butNSMod);
 
         butPICA = new QPushButton(scrollAreaWidgetContents);
         butPICA->setObjectName(QStringLiteral("butPICA"));
         butPICA->setMinimumSize(QSize(200, 200));
         butPICA->setMaximumSize(QSize(200, 200));
 
-        horizontalLayout->addWidget(butPICA);
 
-        butUNIC = new QPushButton(scrollAreaWidgetContents);
-        butUNIC->setObjectName(QStringLiteral("butUNIC"));
-        butUNIC->setMinimumSize(QSize(200, 200));
-        butUNIC->setMaximumSize(QSize(200, 200));
+        butUtility = new QPushButton(scrollAreaWidgetContents);
+        butUtility->setObjectName(QStringLiteral("butUtility"));
+        butUtility->setMinimumSize(QSize(200, 200));
+        butUtility->setMaximumSize(QSize(200, 200));
 
-        horizontalLayout->addWidget(butUNIC);
 
         butProfiling = new QPushButton(scrollAreaWidgetContents);
         butProfiling->setObjectName(QStringLiteral("butProfiling"));
         butProfiling->setMinimumSize(QSize(200, 200));
         butProfiling->setMaximumSize(QSize(200, 200));
 
-        horizontalLayout->addWidget(butProfiling);
 
         butChemRateMod = new QPushButton(scrollAreaWidgetContents);
         butChemRateMod->setObjectName(QStringLiteral("butChemRateMod"));
         butChemRateMod->setMinimumSize(QSize(200, 200));
         butChemRateMod->setMaximumSize(QSize(200, 200));
 
+        horizontalLayout->addWidget(butUtility);
+        horizontalLayout->addWidget(butPICA);
+        horizontalLayout->addWidget(butSPARATS);
+        horizontalLayout->addWidget(butFluMod);
+        horizontalLayout->addWidget(butNSMod);
+        horizontalLayout->addWidget(butProfiling);
         horizontalLayout->addWidget(butChemRateMod);
 
         scrollArea->setWidget(scrollAreaWidgetContents);
@@ -172,7 +173,7 @@ public:
         butSPARATS->setText(QApplication::translate("CMainClass", "UltraSPARATS", 0));
         butNSMod->setText(QApplication::translate("CMainClass", "UltraNSMod", 0));
         butPICA->setText(QApplication::translate("CMainClass", "UltraPICA", 0));
-        butUNIC->setText(QApplication::translate("CMainClass", "UNIC-A Unified CFD", 0));
+        butUtility->setText(QApplication::translate("CMainClass", "UltraUtility", 0));
         butProfiling->setText(QApplication::translate("CMainClass", "UltraProfiling", 0));
         butChemRateMod->setText(QApplication::translate("CMainClass", "UltraChemRateMod", 0));
     } // retranslateUi

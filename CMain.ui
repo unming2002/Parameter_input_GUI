@@ -70,13 +70,13 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1454</width>
-        <height>241</height>
+        <width>1448</width>
+        <height>226</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QPushButton" name="butFluMod">
+        <widget class="QPushButton" name="butUtility">
          <property name="minimumSize">
           <size>
            <width>200</width>
@@ -90,7 +90,7 @@
           </size>
          </property>
          <property name="text">
-          <string>UltraFluMod</string>
+          <string>UltraUtility</string>
          </property>
         </widget>
        </item>
@@ -114,25 +114,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="butNSMod">
-         <property name="minimumSize">
-          <size>
-           <width>200</width>
-           <height>200</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>200</width>
-           <height>200</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>UltraNSMod</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="butPICA">
          <property name="minimumSize">
           <size>
@@ -152,7 +133,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="butUNIC">
+        <widget class="QPushButton" name="butFluMod">
          <property name="minimumSize">
           <size>
            <width>200</width>
@@ -166,7 +147,26 @@
           </size>
          </property>
          <property name="text">
-          <string>UNIC-A Unified CFD</string>
+          <string>UltraFluMod</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="butNSMod">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>200</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>200</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>UltraNSMod</string>
          </property>
         </widget>
        </item>
@@ -215,9 +215,7 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="CMain.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>butLoad</sender>

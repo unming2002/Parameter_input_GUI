@@ -18,13 +18,14 @@ CMain::CMain(QWidget *parent)
 
 	// Groupped nodes
 	{
-		m_mapGroups["ultrapica"] = { new CUltrapica(m_pRootNode), ui.butPICA };
+        m_mapGroups["UltraUtility"] = { new CGroupNode("UltraUtility", m_pRootNode),ui.butUtility };
+
+        m_mapGroups["ultrapica"] = { new CUltrapica(m_pRootNode), ui.butPICA };
 		
 		//TODO: undefined groups, replace "CGroupNode" with well-defined data class
 		m_mapGroups["UltraFluMod"] = { new CGroupNode("UltraFluMod", m_pRootNode), ui.butFluMod };
 		m_mapGroups["UltraSPARATS"] = { new CGroupNode("UltraSPARATS", m_pRootNode), ui.butSPARATS };
         m_mapGroups["UltraNSMod"] = { new CGroupNode("UltraNSMod", m_pRootNode), ui.butNSMod };
-		m_mapGroups["UNIC-A Unified CFD"] = { new CGroupNode("UNIC-A Unified CFD", m_pRootNode),ui.butUNIC };
 		m_mapGroups["UltraProfiling"] = { new CGroupNode("UltraProfiling", m_pRootNode),ui.butProfiling };
 		m_mapGroups["UltraChemRateMod"] = { new CGroupNode("UltraChemRateMod", m_pRootNode), ui.butChemRateMod };
 	}
