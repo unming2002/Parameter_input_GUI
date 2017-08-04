@@ -240,7 +240,13 @@ public:
 					new CStringNode("name", "", this);
 					new CDoubleNode("mass_amu", 0, 4, { 0,1000,1 }, this);
 					new CDoubleNode("charge", 0, 4, { 0,1000,1 }, this);
-				}
+                    new CDoubleNode("T_eV", 0, 4, { 0,1000,1 }, this);
+                    new CDoubleNode("num_den", 0, 4, { 0,1000,1 }, this);
+                    new CDoubleNode("p_in_torr", 0, 4, { 0,1000,1 }, this);
+                    new CIntegerNode("particle_per_cell", 0, { 0,1000,1 }, this);
+                    new CIntegerNode("subcycling", 0, { 0,1000,1 }, this);
+                    new CIntegerNode("weighting", 0, { 0,1000,1 }, this);
+                }
 			};
 
 		public:
@@ -260,43 +266,43 @@ public:
 			}
 		};
 
-		class CInitial : public CListGroup
-		{
-		public:
-			class CItem : public CListItemNode
-			{
-			public:
-				CItem(CTreeNode* pParent) : CListItemNode(pParent)
-				{
-					new CDoubleNode("T_eV", 0, 4, { 0,1000,1 }, this);
-					new CDoubleNode("num_den", 0, 4, { 0,1000,1 }, this);
-					new CDoubleNode("p_in_torr", 0, 4, { 0,1000,1 }, this);
-					new CIntegerNode("particle_per_cell", 0, { 0,1000,1 }, this);
-					new CIntegerNode("subcycling", 0, { 0,1000,1 }, this);
-					new CIntegerNode("weighting", 0, { 0,1000,1 }, this);
-				}
-			};
+//		class CInitial : public CListGroup
+//		{
+//		public:
+//			class CItem : public CListItemNode
+//			{
+//			public:
+//				CItem(CTreeNode* pParent) : CListItemNode(pParent)
+//				{
+//					new CDoubleNode("T_eV", 0, 4, { 0,1000,1 }, this);
+//					new CDoubleNode("num_den", 0, 4, { 0,1000,1 }, this);
+//					new CDoubleNode("p_in_torr", 0, 4, { 0,1000,1 }, this);
+//					new CIntegerNode("particle_per_cell", 0, { 0,1000,1 }, this);
+//					new CIntegerNode("subcycling", 0, { 0,1000,1 }, this);
+//					new CIntegerNode("weighting", 0, { 0,1000,1 }, this);
+//				}
+//			};
 
-		public:
-			CInitial(CTreeNode* pParent) : CListGroup("initial", gDisableFileSelect, pParent) {}
+//		public:
+//			CInitial(CTreeNode* pParent) : CListGroup("initial", gDisableFileSelect, pParent) {}
 
-			CTreeNode* addListItem() override
-			{
-				CItem* pItem = new CItem(this);
-				return pItem;
-			}
-		};
+//			CTreeNode* addListItem() override
+//			{
+//				CItem* pItem = new CItem(this);
+//				return pItem;
+//			}
+//		};
 
 	public:
 		CSpecies(CTreeNode* pParent) : CGroupNode("species", pParent)
 		{
 			m_pMolecule = new CMolecule(this);
-			m_pInitial = new CInitial(this);
+//			m_pInitial = new CInitial(this);
 		}
 
 	public:
 		CMolecule*	m_pMolecule;
-		CInitial*	m_pInitial;
+        //CInitial*	m_pInitial;
 	};
 
 	class CPoisson : public CGroupNode
