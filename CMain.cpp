@@ -15,7 +15,7 @@ CMain::CMain(QWidget *parent)
 	ui.setupUi(this);
 
 	// First layer node
-	m_pRootNode = new CGroupNode("p3_multiphysics", nullptr);
+    m_pRootNode = new CGroupNode("p3_multiphysics", nullptr);
 
 	// Groupped nodes
 	{
@@ -24,11 +24,11 @@ CMain::CMain(QWidget *parent)
         m_mapGroups["ultrapica"] = { new CUltrapica(m_pRootNode), ui.butPICA };
 		
 		//TODO: undefined groups, replace "CGroupNode" with well-defined data class
-		m_mapGroups["UltraFluMod"] = { new CGroupNode("UltraFluMod", m_pRootNode), ui.butFluMod };
-		m_mapGroups["UltraSPARATS"] = { new CGroupNode("UltraSPARATS", m_pRootNode), ui.butSPARATS };
+        m_mapGroups["ultraflumod"] = { new CGroupNode("ultraflumod", m_pRootNode), ui.butFluMod };
+        m_mapGroups["ultrasparts"] = { new CGroupNode("ultrasparts", m_pRootNode), ui.butSPARTS };
         m_mapGroups["UltraNSMod"] = { new CGroupNode("UltraNSMod", m_pRootNode), ui.butNSMod };
-		m_mapGroups["UltraProfiling"] = { new CGroupNode("UltraProfiling", m_pRootNode),ui.butProfiling };
-		m_mapGroups["UltraChemRateMod"] = { new CGroupNode("UltraChemRateMod", m_pRootNode), ui.butChemRateMod };
+        m_mapGroups["UltraProfiling"] = { new CGroupNode("UltraProfiling", m_pRootNode),ui.butProfiling };
+        m_mapGroups["UltraChemRateMod"] = { new CGroupNode("UltraChemRateMod", m_pRootNode), ui.butChemRateMod };
 	}
 
 	m_pEditor = new CEditor();
@@ -45,7 +45,13 @@ CMain::CMain(QWidget *parent)
 			pEditor->setDataTree(pNode);
 			pEditor->show();
 		});
-	}
+
+        rItem.second.pButton->hide();
+        if(rItem.first == "ultrautility") rItem.second.pButton->show();
+        if(rItem.first == "ultrapica") rItem.second.pButton->show();
+        //if(rItem.first == "ultrasparts") rItem.second.pButton->show();
+        //if(rItem.first == "ultraflumod") rItem.second.pButton->show();
+    }
 }
 
 void CMain::slotLoadProject()
@@ -63,17 +69,28 @@ void CMain::slotLoadProject()
 			{
 				QJsonObject mJsonObj = loadDoc.object();
 				// Get first layer node (root)
-				if (mJsonObj.contains("p3_multiphysics"))
-				{
-					// setup full data tree
-					for (auto& rItem : m_mapGroups)
-						m_pRootNode->addChild(rItem.second.pTreeNode);
+                //if (mJsonObj.contains("p3_multiphysics"))
+                //{
 
-					// read all data
-					m_pRootNode->read(mJsonObj);
+                // setup full data tree
+                    for(auto& it :  mJsonObj.keys())
+                    {
+                        m_mapGroups[it.toUtf8().constData()].pTreeNode->read(mJsonObj);
+                    }
 
-					QJsonObject mSubNode = mJsonObj["p3_multiphysics"].toObject();
-					// check if grouped node existed
+
+                    for (auto& rItem : m_mapGroups)
+                        m_pRootNode->addChild(rItem.second.pTreeNode);
+
+
+                    // read all data
+                    //m_pRootNode->read(mJsonObj);
+
+                    //QJsonObject mSubNode = mJsonObj["p3_multiphysics"].toObject();
+
+                    QJsonObject mSubNode = mJsonObj;
+
+                    // check if grouped node existed
 					for (auto& rItem : m_mapGroups)
 					{
 						if (mSubNode.contains(rItem.first.c_str()))
@@ -86,7 +103,7 @@ void CMain::slotLoadProject()
 					}
 
 					return;
-				}
+                //}
 			}
 		}
 		QMessageBox::critical(this, tr("Project File Open Failed"), tr("Can't read the project file:\n\n  ") + sFileName);
@@ -98,27 +115,32 @@ void CMain::slotSaveProject()
 	QString sFileName = QFileDialog::getSaveFileName(this, tr("Save the project file"), "", qProjectFileFilter);
 	if (sFileName != "")
 	{
-		// construct data tree that visible
+        // write JSON
+        QJsonObject mObj;
+
+        // construct data tree that visible
 		for (auto& rItem : m_mapGroups)
 		{
 			// re-add to root node for write
 			if(!rItem.second.pButton->isHidden())
 				m_pRootNode->addChild(rItem.second.pTreeNode);
+
+            if(!rItem.second.pButton->isHidden())
+                rItem.second.pTreeNode->write(mObj);
 		}
 
-		// write JSON
-		QJsonObject mObj;
-		m_pRootNode->write(mObj);
+       // m_pRootNode->write(mObj);
 
 		for (auto& rItem : m_mapGroups)
 			m_pRootNode->removeChild(rItem.second.pTreeNode);
 
 		//write to file
 		QJsonDocument saveDoc(mObj);
-		QFile saveFile(sFileName);
+        QFile saveFile(sFileName);
+
 		if (saveFile.open(QIODevice::WriteOnly))
 		{
-			saveFile.write(saveDoc.toJson());
+            saveFile.write(saveDoc.toJson());
 			return;
 		}
 

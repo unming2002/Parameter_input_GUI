@@ -342,7 +342,7 @@ CTreeNode* CListGroup::addListItem()
 #pragma endregion
 
 #pragma region Functions of CListItemNode
-CListItemNode::CListItemNode(CTreeNode * pParent) : CGroupNode("<ListItem>", pParent)
+CListItemNode::CListItemNode(CTreeNode * pParent) : CGroupNode("<------------------------------------------------->", pParent)
 {
 	m_pValueEditor->setFixedWidth(90);
 	QLayout* pLayout = m_pValueEditor->layout();

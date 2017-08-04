@@ -1,0 +1,412 @@
+{
+	"ultrautility":
+	{
+		"auto_generate_hex_structure_grid":
+		{
+			"enable": true,
+			"nx": 251,
+			"ny": 251, 
+			"nz": 2,
+			"dx": 0.0004,
+			"dy": 0.0004,
+			"dz": 0.0004,
+			"boundary_settings": [ 5, 3, 3, 4, 2, 1 ]
+		}
+	},
+
+	"ultrapica":
+	{
+	    "external_field": {
+		"applied_voltage": {
+		    "amplitude_V": 55.0,
+		    "radio_frequency_Hz": 13560000.0
+		},
+		"gravity": {
+		    "enabled": false,
+		    "gx": 0.0,
+		    "gy": 0.0,
+		    "gz": -9.8
+		},
+		"magnetic_field": {
+		    "Bx": 0.0,
+		    "By": 0.0,
+		    "Bz": 0.0,
+		    "enabled": false,
+		    "unit": "Gauss"
+		}
+	    },
+	    "grid_system": {
+		"boundary_table": [
+		    {
+		        "name": "Delete",
+		        "typeid": 1
+		    },
+		    {
+		        "name": "Fluid",
+		        "typeid": 0
+		    },
+		    {
+		        "name": "Wall_1",
+		        "typeid": -1
+		    },
+		    {
+		        "name": "Wall_2",
+		        "typeid": -2
+		    },
+		    {
+		        "name": "Neumann",
+		        "typeid": -101
+		    }
+		],
+		"geometry": "Axisymmetric_Y",
+		"meshfile": "auto_grid.uns",
+		"reference_cell_volume": 1.6e-07,
+		"scale": 1.0
+	    },
+	    "interpolation": {
+		"particle_to_cell": "inversed_cartesian_volume"
+	    },
+	    "mcc_setting": {
+		"collision_group": [
+		    {
+		        "channels": [
+		            {
+		                "activation_energy": 0.0,
+		                "energy_redistribution": "None",
+		                "energy_transfer": "Scattering",
+		                "name": "Scattering",
+		                "product": [
+		                    "Electron",
+		                    "Argon"
+		                ]
+		            },
+		            {
+		                "activation_energy": 12.0,
+		                "energy_redistribution": "None",
+		                "energy_transfer": "Rebounce",
+		                "name": "Excitation",
+		                "product": [
+		                    "Electron",
+		                    "Argon"
+		                ]
+		            },
+		            {
+		                "activation_energy": 15.76,
+		                "energy_redistribution": "NewParticle",
+		                "energy_transfer": "Rebounce",
+		                "name": "Ionization",
+		                "product": [
+		                    "Electron",
+		                    "Argon+",
+		                    "Electron"
+		                ]
+		            }
+		        ],
+		        "reactant": [
+		            "Electron",
+		            "Argon"
+		        ]
+		    },
+		    {
+		        "channels": [
+		            {
+		                "activation_energy": 0.0,
+		                "energy_redistribution": "None",
+		                "energy_transfer": "Elastic",
+		                "name": "Scattering",
+		                "product": [
+		                    "Argon+",
+		                    "Argon"
+		                ]
+		            },
+		            {
+		                "activation_energy": 0.0,
+		                "energy_redistribution": "None",
+		                "energy_transfer": "Exchange",
+		                "name": "Exchange",
+		                "product": [
+		                    "Argon",
+		                    "Argon+"
+		                ]
+		            }
+		        ],
+		        "reactant": [
+		            "Argon+",
+		            "Argon"
+		        ]
+		    }
+		],
+		"enabled": true,
+		"number_of_relaxing_cycle": 0.0,
+		"selected_pair": "Cell_Max_Velocity"
+	    },
+	    "monitor_options": {
+		"check_kinetic_energy": false,
+		"debug_mode": false,
+		"delta_cycle_of_restart_output": 20,
+		"number_of_cycle_per_file_out": 2,
+		"number_of_file_out_per_cycle": 20,
+		"number_of_step_per_monitor_out": 40,
+		"sampling_cycle_size": 20
+	    },
+	    "parallel_computing": {
+		"loading_balance_checking_frequency": 1,
+		"loading_balance_checking_timing": "cycle",
+		"loading_balance_factor": 1.001,
+		"loading_balance_method": "mixed",
+		"partition_domain": "particle"
+	    },
+	    "particle_settings": {
+		"Split_Combine_Control": true,
+		"maximum_particle_size": 4000000,
+		"particle_scaling_factor": 1.35
+	    },
+	    "poisson": {
+		"RELATIVE_TOLERANCE": 1e-07,
+		"boundary": [
+		    {
+		        "capacitor": 0.0,
+		        "frequency": 13560000.0,
+		        "name": "Wall_1",
+		        "phase_shift": 0.0,
+		        "type": "SIN",
+		        "voltage": 55.0
+		    },
+		    {
+		        "capacitor": 0.0,
+		        "frequency": 13560000.0,
+		        "name": "Wall_2",
+		        "phase_shift": 0.0,
+		        "type": "SIN",
+		        "voltage": -55.0
+		    },
+		    {
+		        "name": "Neumann",
+		        "type": "NEUMANN"
+		    }
+		],
+		"boundary_table": "auto_bc.inp",
+		"fvm_scheme": "Implicit",
+		"geometry": "Axisymmetric_Y",
+		"meshfile": "auto_grid.uns",
+		"pc_type": "PETSC_PCAMG",
+		"relative_tolerance": 1e-06,
+		"scale": 1.0,
+		"update_permittivity": false
+	    },
+	    "species": {
+		"molecule": [
+		    {
+		        "T_eV": 1.0,
+		        "charge": -1.0,
+		        "mass_amu": 0.0001,
+		        "name": "Electron",
+		        "num_den": 200000000000000.0,
+		        "p_in_torr": 0.0,
+		        "particle_per_cell": 10,
+		        "subcycling": 1,
+		        "weighting": 1000
+		    },
+		    {
+		        "T_eV": 0.026,
+		        "charge": 1.0,
+		        "mass_amu": 39.948,
+		        "name": "Argon+",
+		        "num_den": 200000000000000.0,
+		        "p_in_torr": 0.0,
+		        "particle_per_cell": 10,
+		        "subcycling": 1,
+		        "weighting": 1000
+		    },
+		    {
+		        "T_eV": 0.026,
+		        "charge": 0.0,
+		        "mass_amu": 39.948,
+		        "name": "Argon",
+		        "num_den": 0.0,
+		        "p_in_torr": 0.01,
+		        "particle_per_cell": 0,
+		        "subcycling": 0,
+		        "weighting": 0
+		    }
+		]
+	    },
+	    "time_step_setup": {
+		"delta_t_s": 1e-12,
+		"restart_tag": 0,
+		"time_shift_s": 0.0,
+		"total_cycles": 500,
+		"total_steps": 1000000
+	    }
+	},
+
+	"ultrasparts":
+	{
+
+	},
+
+
+	"ultraflumod":
+	{
+		"information": "Plasma Fluid Modeling",
+
+		"normalization":
+		{
+			"N_density": 1.0e15,
+			"N_mass":		6.6e-26,
+			"N_potentia;":	1.0
+		},
+
+		"chemistry": "Ar_reactions.txt",
+	
+		"initial":
+		{
+			"GasTemperatureUnit": "K",
+			"GasTemperature":  300.0,
+			"ElectronTemperatureUnit": "eV",
+			"ElectronTemperature": 3.0,
+
+			"species": 
+			[ 
+				{ 
+					"name": "Ar", 
+					"density": 2.0,
+					"density_unit": "Torr" 
+				},
+				{ 
+					"name": "Ar_r", 
+					"density": 1.0e15,
+					"density_unit": "m-3" 
+				},
+				{ 
+					"name": "Ar_m", 
+					"density": 1.0e17,
+					"density_unit": "m-3" 
+				},
+				{ 
+					"name": "Ar-p", 
+					"density": 1.0e14,
+					"density_unit": "m-3" 
+				}
+			]
+		},
+
+		"domain":
+		{
+			"geometry": "2D", 
+			"poisson_meshfile": "example_structure_100x10.uns",
+			"species_meshfile": "example_structure_100x10.uns",
+			"boundary_table": "boundary.txt"
+		},
+
+		"poisson":
+		{
+			"fvm_scheme": "Implicit", 
+			"meshfile": "example_unstructure_100x10.uns",
+			"boundary_table": "boundary.txt",
+			"geometry" : "2D", 
+			"boundary":  
+			[
+				{ "name": "D1", "type": "GROUND" },
+				{ "name": "D2", "type": "CONSTANT", "voltage": 100.0 }, 
+				{ "name": "Neumann", "type": "NEUMANN" }
+			],
+			"update_permittivity": true,
+			"pc_type": "PETSC_PCAMG",
+			"relative_tolerance": 1.0e-8 
+		},
+
+		"species":
+		[
+			{
+				"name"             : "Electron",
+				"short_name"       : "e",
+				"diffusivity_type" : "File",
+				"diffusivity_file" : "Ar-diffusion-BOLSIG-Boltzman.txt",
+				"diffusivity_dependent_variable": "Te", 
+				"mobility_type"                  : "File",
+				"mobility_file"                  : "diffusivity_type",
+				"mobility_dependent_variable"    : "Te", 
+				"mass_amu": 5.485799094e-4,
+				"mass_kg": 9.10938291e-31,
+				"viscosity": 0.0,
+				"polarizability": 0.0, 
+				"LJ_potential" : 0.0, 
+				"binary_diameter": 0.0, 
+				"charge": -1.0,
+				"temporal_scheme": "BackwardEular"
+			},
+			{
+				"name": "Argon Ion" ,
+				"short_name": "Ar-p",
+				"diffusivity_type": "Constant",
+				"diffusivity": 0.02,
+				"mobility_type": "Constant",
+				"mobility": 0.336129,
+				"mass_amu": 39.948,
+				"mass_kg":  6.6335209e-26,
+				"viscosity": 2.29e-5 ,
+				"polarizability": 1.641 ,
+				"LJ_potential": 119.8 ,
+				"binary_diameter": 3.4 ,
+				"charge":  1.0,
+				"temporal_scheme": "BackwardEular"
+			},
+			{
+				"name": "Ar metastable"
+			},
+			{
+				"name": "Ar resonance"
+			},
+			{
+				"name": "Argon"
+			}
+		],
+		
+		"reactions":
+		[ 
+			{
+				"equation": "e + Ar    -> Ar + e", 
+				"momentum":true, 
+				"rate_table": "Ar-00-BOLSIG-Boltz-mom.txt" 
+			},
+			{ 
+				"equation": "e + Ar    -> Ar-p + 2e",
+				"threshold": 15.9,
+				"rate_table": "Ar-01-BOLSIG-Boltz-ionization.txt" 
+			},
+			{ 
+				"equation": "e + Ar    -> Ar_m + e",
+				"threshold": 11.55,
+				"rate_table": "Ar-02-BOLSIG-Boltz-meta-ex.txt" 
+			},
+			{ 
+				"equation": "e + Ar    -> Ar_r + e",
+				"threshold": 11.62,
+				"rate_table": "Ar-03-BOLSIG-Boltz-resonance-ex.txt" 
+			},
+			{
+				"equation": "e + Ar_m  -> Ar-p + 2e",
+				"threshold": 4.35,
+				"rate_table": "Ar-04-BOLSIG-Boltz-meta-ionization.txt"
+			},
+			{
+				"equation": "e + Ar_m  -> Ar_r + e",
+				"threshold": 0.07,
+				"rate_constant": 2.0e-13
+			},
+			{
+				"equation": "2Ar_m     -> Ar + Ar-p + e",
+				"rate_constant": 6.2e-16
+			},
+			{ 
+				"equation": "Ar_r      -> Ar",
+				"rate_constant": 1.0e6
+			},
+			{
+				"equation": "Ar + Ar_m -> 2Ar",
+				"rate_constant": 3.0e-21
+			} 
+        ]
+	} 
+}

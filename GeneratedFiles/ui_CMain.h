@@ -40,7 +40,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *butUtility;
     QPushButton *butPICA;
-    QPushButton *butSPARATS;
+    QPushButton *butSPARTS;
     QPushButton *butFluMod;
     QPushButton *butNSMod;
     QPushButton *butProfiling;
@@ -106,10 +106,10 @@ public:
         butFluMod->setMaximumSize(QSize(200, 200));
 
 
-        butSPARATS = new QPushButton(scrollAreaWidgetContents);
-        butSPARATS->setObjectName(QStringLiteral("butSPARATS"));
-        butSPARATS->setMinimumSize(QSize(200, 200));
-        butSPARATS->setMaximumSize(QSize(200, 200));
+        butSPARTS = new QPushButton(scrollAreaWidgetContents);
+        butSPARTS->setObjectName(QStringLiteral("butSPARTS"));
+        butSPARTS->setMinimumSize(QSize(200, 200));
+        butSPARTS->setMaximumSize(QSize(200, 200));
 
 
         butNSMod = new QPushButton(scrollAreaWidgetContents);
@@ -143,7 +143,7 @@ public:
 
         horizontalLayout->addWidget(butUtility);
         horizontalLayout->addWidget(butPICA);
-        horizontalLayout->addWidget(butSPARATS);
+        horizontalLayout->addWidget(butSPARTS);
         horizontalLayout->addWidget(butFluMod);
         horizontalLayout->addWidget(butNSMod);
         horizontalLayout->addWidget(butProfiling);
@@ -170,7 +170,7 @@ public:
         butSave->setText(QApplication::translate("CMainClass", "Save Project File...", 0));
         butPreference->setText(QApplication::translate("CMainClass", "Preference", 0));
         butFluMod->setText(QApplication::translate("CMainClass", "UltraFluMod", 0));
-        butSPARATS->setText(QApplication::translate("CMainClass", "UltraSPARATS", 0));
+        butSPARTS->setText(QApplication::translate("CMainClass", "UltraSPARATS", 0));
         butNSMod->setText(QApplication::translate("CMainClass", "UltraNSMod", 0));
         butPICA->setText(QApplication::translate("CMainClass", "UltraPICA", 0));
         butUtility->setText(QApplication::translate("CMainClass", "UltraUtility", 0));
