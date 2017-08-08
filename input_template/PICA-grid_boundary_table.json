@@ -1,0 +1,9 @@
+{
+	"boundary_table":
+		[ 	{ "name": "Delete",	"typeid": 1 	},
+		  	{ "name": "Fluid",	"typeid": 0 	},
+		  	{ "name": "Wall_1",	"typeid": -1	},
+			{ "name": "Wall_2", 	"typeid": -2 	},
+		    	{ "name": "Neumann", 	"typeid": -101 	}
+		]
+}

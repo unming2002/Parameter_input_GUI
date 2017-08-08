@@ -1,0 +1,13 @@
+{
+	"molecule":
+		{	"name": "Argon+",
+		        "mass_amu": 39.948,
+		        "charge": 1.0,
+			"T_eV": 0.026,
+		        "num_den": 2.0e14,
+		        "p_in_torr": 0.0,
+		        "particle_per_cell": 10,
+		        "subcycling": 1,
+		        "weighting": 1000
+		}
+}

@@ -74,7 +74,7 @@
 		                "activation_energy": 0.0,
 		                "energy_redistribution": "None",
 		                "energy_transfer": "Scattering",
-		                "name": "Scattering",
+		                "name": "Electron_Argon_Scattering",
 		                "product": [
 		                    "Electron",
 		                    "Argon"
@@ -84,7 +84,7 @@
 		                "activation_energy": 12.0,
 		                "energy_redistribution": "None",
 		                "energy_transfer": "Rebounce",
-		                "name": "Excitation",
+		                "name": "Electron_Argon_Excitation",
 		                "product": [
 		                    "Electron",
 		                    "Argon"
@@ -94,7 +94,7 @@
 		                "activation_energy": 15.76,
 		                "energy_redistribution": "NewParticle",
 		                "energy_transfer": "Rebounce",
-		                "name": "Ionization",
+		                "name": "Electron_Argon_Ionization",
 		                "product": [
 		                    "Electron",
 		                    "Argon+",
@@ -113,7 +113,7 @@
 		                "activation_energy": 0.0,
 		                "energy_redistribution": "None",
 		                "energy_transfer": "Elastic",
-		                "name": "Scattering",
+		                "name": "Argon+_Argon_Scattering",
 		                "product": [
 		                    "Argon+",
 		                    "Argon"
@@ -123,7 +123,7 @@
 		                "activation_energy": 0.0,
 		                "energy_redistribution": "None",
 		                "energy_transfer": "Exchange",
-		                "name": "Exchange",
+		                "name": "Argon+_Argon_Charge_Exchange",
 		                "product": [
 		                    "Argon",
 		                    "Argon+"
@@ -199,7 +199,7 @@
 		    {
 		        "T_eV": 1.0,
 		        "charge": -1.0,
-		        "mass_amu": 0.0001,
+		        "mass_amu": 0.000548579909,
 		        "name": "Electron",
 		        "num_den": 200000000000000.0,
 		        "p_in_torr": 0.0,

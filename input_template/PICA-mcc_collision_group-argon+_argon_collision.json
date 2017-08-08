@@ -1,0 +1,22 @@
+{
+	"collision_group":
+		{
+			"reactant": [	"Argon+",	"Argon"	],
+			"channels": [	{	
+						"product": 	[	"Argon+",	"Argon"	],
+		                		"name": "Scattering",
+						"activation_energy": 0.0,
+						"energy_redistribution": "None",
+		                		"energy_transfer": "Elastic"
+					},
+					{
+						"product":	[	"Argon",	"Argon+"],
+						"name": "Exchange",
+						"activation_energy": 0.0,
+						"energy_redistribution": "None",
+						"energy_transfer": "Exchange"
+					}
+				    ]
+		}
+}
+
