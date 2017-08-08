@@ -239,7 +239,7 @@ public:
 				{
 					new CStringNode("name", "", this);
 					new CDoubleNode("mass_amu", 0, 4, { 0,1000,1 }, this);
-					new CDoubleNode("charge", 0, 4, { 0,1000,1 }, this);
+                    new CDoubleNode("charge", 0, 4, { -1000,1000,1 }, this);
                     new CDoubleNode("T_eV", 0, 4, { 0,1000,1 }, this);
                     new CDoubleNode("num_den", 0, 4, { 0,1000,1 }, this);
                     new CDoubleNode("p_in_torr", 0, 4, { 0,1000,1 }, this);
@@ -317,7 +317,7 @@ public:
 				CItem(CTreeNode* pParent) : CListItemNode(pParent)
 				{
 					new CStringNode("name", "", this);
-					new CComboBoxNode("type", {"SIN","COS","GROUND"},0,this);
+                    new CComboBoxNode("type", {"SIN","COS","GROUND","NEUMANN"},0,this);
 					new CDoubleNode("voltage", 0, 4, { 0,1000,1 }, this);
 					new CDoubleNode("frequency", 1.36E+7, 2, { 0,1E+8,1 }, this);
 					new CDoubleNode("phaseShift", 0, 4, { 0,1000,1 }, this);
