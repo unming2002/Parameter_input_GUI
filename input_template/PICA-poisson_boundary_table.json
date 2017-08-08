@@ -1,0 +1,10 @@
+{
+	"boundary":
+		[ 
+		  	{ "name": "Wall_1",	"type": "SIN",	"voltage": 55.0,	"frequency": 13.56e6,	"capacitor": 0.0,	"phase_shift": 0.0},
+		  	{ "name": "Wall_2",	"type": "SIN",	"voltage": -55.0,	"frequency": 13.56e6,	"capacitor": 0.0,	"phase_shift": 0.0},
+		    	{ "name": "Neumann", 	"type": "NEUMANN"}
+		]
+}
+
+
