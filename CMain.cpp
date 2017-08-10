@@ -7,6 +7,10 @@
 #include <QJsonDocument>
 #include <QMessageBox>
 
+#include <iostream>
+
+using namespace std;
+
 static const QString qProjectFileFilter = QObject::tr("Project file (*.json);;All files (*.*)");
 
 CMain::CMain(QWidget *parent)
@@ -15,7 +19,7 @@ CMain::CMain(QWidget *parent)
 	ui.setupUi(this);
 
 	// First layer node
-    m_pRootNode = new CGroupNode("p3_multiphysics", nullptr);
+	m_pRootNode = new CGroupNode("p3_multiphysics", nullptr);
 
 	// Groupped nodes
 	{
@@ -71,13 +75,16 @@ void CMain::slotLoadProject()
 				// Get first layer node (root)
                 //if (mJsonObj.contains("p3_multiphysics"))
                 //{
-
                 // setup full data tree
                     for(auto& it :  mJsonObj.keys())
                     {
-                        m_mapGroups[it.toUtf8().constData()].pTreeNode->read(mJsonObj);
+			if ( m_mapGroups.find( it.toUtf8().constData() ) != m_mapGroups.end() )
+                        {
+				m_mapGroups[it.toUtf8().constData()].pTreeNode->read(mJsonObj);
+			} else 
+			{	std::cout << "Unknown key value:" << it.toUtf8().constData() << endl;
+			}			
                     }
-
 
                     for (auto& rItem : m_mapGroups)
                         m_pRootNode->addChild(rItem.second.pTreeNode);

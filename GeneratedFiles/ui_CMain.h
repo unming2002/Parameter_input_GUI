@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'CMain.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -39,8 +39,8 @@ public:
     QWidget *scrollAreaWidgetContents;
     QHBoxLayout *horizontalLayout;
     QPushButton *butUtility;
-    QPushButton *butPICA;
     QPushButton *butSPARTS;
+    QPushButton *butPICA;
     QPushButton *butFluMod;
     QPushButton *butNSMod;
     QPushButton *butProfiling;
@@ -50,7 +50,7 @@ public:
     {
         if (CMainClass->objectName().isEmpty())
             CMainClass->setObjectName(QStringLiteral("CMainClass"));
-        CMainClass->resize(645, 348);
+        CMainClass->resize(640, 372);
         verticalLayout = new QVBoxLayout(CMainClass);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -94,59 +94,58 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1454, 241));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1448, 250));
         horizontalLayout = new QHBoxLayout(scrollAreaWidgetContents);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        butUtility = new QPushButton(scrollAreaWidgetContents);
+        butUtility->setObjectName(QStringLiteral("butUtility"));
+        butUtility->setMinimumSize(QSize(200, 200));
+        butUtility->setMaximumSize(QSize(200, 200));
 
-        butFluMod = new QPushButton(scrollAreaWidgetContents);
-        butFluMod->setObjectName(QStringLiteral("butFluMod"));
-        butFluMod->setMinimumSize(QSize(200, 200));
-        butFluMod->setMaximumSize(QSize(200, 200));
-
+        horizontalLayout->addWidget(butUtility);
 
         butSPARTS = new QPushButton(scrollAreaWidgetContents);
         butSPARTS->setObjectName(QStringLiteral("butSPARTS"));
         butSPARTS->setMinimumSize(QSize(200, 200));
         butSPARTS->setMaximumSize(QSize(200, 200));
 
-
-        butNSMod = new QPushButton(scrollAreaWidgetContents);
-        butNSMod->setObjectName(QStringLiteral("butNSMod"));
-        butNSMod->setMinimumSize(QSize(200, 200));
-        butNSMod->setMaximumSize(QSize(200, 200));
-
+        horizontalLayout->addWidget(butSPARTS);
 
         butPICA = new QPushButton(scrollAreaWidgetContents);
         butPICA->setObjectName(QStringLiteral("butPICA"));
         butPICA->setMinimumSize(QSize(200, 200));
         butPICA->setMaximumSize(QSize(200, 200));
 
+        horizontalLayout->addWidget(butPICA);
 
-        butUtility = new QPushButton(scrollAreaWidgetContents);
-        butUtility->setObjectName(QStringLiteral("butUtility"));
-        butUtility->setMinimumSize(QSize(200, 200));
-        butUtility->setMaximumSize(QSize(200, 200));
+        butFluMod = new QPushButton(scrollAreaWidgetContents);
+        butFluMod->setObjectName(QStringLiteral("butFluMod"));
+        butFluMod->setMinimumSize(QSize(200, 200));
+        butFluMod->setMaximumSize(QSize(200, 200));
 
+        horizontalLayout->addWidget(butFluMod);
+
+        butNSMod = new QPushButton(scrollAreaWidgetContents);
+        butNSMod->setObjectName(QStringLiteral("butNSMod"));
+        butNSMod->setMinimumSize(QSize(200, 200));
+        butNSMod->setMaximumSize(QSize(200, 200));
+
+        horizontalLayout->addWidget(butNSMod);
 
         butProfiling = new QPushButton(scrollAreaWidgetContents);
         butProfiling->setObjectName(QStringLiteral("butProfiling"));
         butProfiling->setMinimumSize(QSize(200, 200));
         butProfiling->setMaximumSize(QSize(200, 200));
 
+        horizontalLayout->addWidget(butProfiling);
 
         butChemRateMod = new QPushButton(scrollAreaWidgetContents);
         butChemRateMod->setObjectName(QStringLiteral("butChemRateMod"));
         butChemRateMod->setMinimumSize(QSize(200, 200));
         butChemRateMod->setMaximumSize(QSize(200, 200));
 
-        horizontalLayout->addWidget(butUtility);
-        horizontalLayout->addWidget(butPICA);
-        horizontalLayout->addWidget(butSPARTS);
-        horizontalLayout->addWidget(butFluMod);
-        horizontalLayout->addWidget(butNSMod);
-        horizontalLayout->addWidget(butProfiling);
         horizontalLayout->addWidget(butChemRateMod);
 
         scrollArea->setWidget(scrollAreaWidgetContents);
@@ -164,18 +163,18 @@ public:
 
     void retranslateUi(QWidget *CMainClass)
     {
-        CMainClass->setWindowTitle(QApplication::translate("CMainClass", "RAPIT Platform", 0));
-        groupBox->setTitle(QApplication::translate("CMainClass", "Project File", 0));
-        butLoad->setText(QApplication::translate("CMainClass", "Load Project File...", 0));
-        butSave->setText(QApplication::translate("CMainClass", "Save Project File...", 0));
-        butPreference->setText(QApplication::translate("CMainClass", "Preference", 0));
-        butFluMod->setText(QApplication::translate("CMainClass", "UltraFluMod", 0));
-        butSPARTS->setText(QApplication::translate("CMainClass", "UltraSPARATS", 0));
-        butNSMod->setText(QApplication::translate("CMainClass", "UltraNSMod", 0));
-        butPICA->setText(QApplication::translate("CMainClass", "UltraPICA", 0));
-        butUtility->setText(QApplication::translate("CMainClass", "UltraUtility", 0));
-        butProfiling->setText(QApplication::translate("CMainClass", "UltraProfiling", 0));
-        butChemRateMod->setText(QApplication::translate("CMainClass", "UltraChemRateMod", 0));
+        CMainClass->setWindowTitle(QApplication::translate("CMainClass", "RAPIT Platform", Q_NULLPTR));
+        groupBox->setTitle(QApplication::translate("CMainClass", "Project File", Q_NULLPTR));
+        butLoad->setText(QApplication::translate("CMainClass", "Load Project File...", Q_NULLPTR));
+        butSave->setText(QApplication::translate("CMainClass", "Save Project File...", Q_NULLPTR));
+        butPreference->setText(QApplication::translate("CMainClass", "Preference", Q_NULLPTR));
+        butUtility->setText(QApplication::translate("CMainClass", "UltraUtility", Q_NULLPTR));
+        butSPARTS->setText(QApplication::translate("CMainClass", "UltraSPARATS", Q_NULLPTR));
+        butPICA->setText(QApplication::translate("CMainClass", "UltraPICA", Q_NULLPTR));
+        butFluMod->setText(QApplication::translate("CMainClass", "UltraFluMod", Q_NULLPTR));
+        butNSMod->setText(QApplication::translate("CMainClass", "UltraNSMod", Q_NULLPTR));
+        butProfiling->setText(QApplication::translate("CMainClass", "UltraProfiling", Q_NULLPTR));
+        butChemRateMod->setText(QApplication::translate("CMainClass", "UltraChemRateMod", Q_NULLPTR));
     } // retranslateUi
 
 };
