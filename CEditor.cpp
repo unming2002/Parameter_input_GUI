@@ -1,5 +1,4 @@
 #include "CEditor.h"
-#include "NodeUltrapica.h"
 
 CEditor::CEditor(QWidget *parent)
 	: QWidget(parent)

@@ -1,6 +1,7 @@
 #include "CMain.h"
 #include "NodeUltrapica.h"
 #include "NodeUltraUtility.h"
+#include "NodeUltraSparts.h"
 
 #include <QFile>
 #include <QFileDialog>
@@ -26,10 +27,11 @@ CMain::CMain(QWidget *parent)
         m_mapGroups["ultrautility"] = { new CUltraUtility(m_pRootNode),ui.butUtility };
 
         m_mapGroups["ultrapica"] = { new CUltrapica(m_pRootNode), ui.butPICA };
-		
+
+        m_mapGroups["ultrasparts"] = { new CUltrasparts(m_pRootNode), ui.butSPARTS };
+
 		//TODO: undefined groups, replace "CGroupNode" with well-defined data class
         m_mapGroups["ultraflumod"] = { new CGroupNode("ultraflumod", m_pRootNode), ui.butFluMod };
-        m_mapGroups["ultrasparts"] = { new CGroupNode("ultrasparts", m_pRootNode), ui.butSPARTS };
         m_mapGroups["UltraNSMod"] = { new CGroupNode("UltraNSMod", m_pRootNode), ui.butNSMod };
         m_mapGroups["UltraProfiling"] = { new CGroupNode("UltraProfiling", m_pRootNode),ui.butProfiling };
         m_mapGroups["UltraChemRateMod"] = { new CGroupNode("UltraChemRateMod", m_pRootNode), ui.butChemRateMod };
@@ -53,7 +55,7 @@ CMain::CMain(QWidget *parent)
         rItem.second.pButton->hide();
         if(rItem.first == "ultrautility") rItem.second.pButton->show();
         if(rItem.first == "ultrapica") rItem.second.pButton->show();
-        //if(rItem.first == "ultrasparts") rItem.second.pButton->show();
+        if(rItem.first == "ultrasparts") rItem.second.pButton->show();
         //if(rItem.first == "ultraflumod") rItem.second.pButton->show();
     }
 }
