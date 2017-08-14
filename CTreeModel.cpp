@@ -80,13 +80,18 @@ void CTreeNode::removeValueEditorFromTreeWidget()
 
 bool CTreeNode::eventFilter(QObject * obj, QEvent * pEvent)
 {
-	if (pEvent->type() == QEvent::FocusIn)
+	switch (pEvent->type())
+	{
+	case QEvent::FocusIn:
 	{
 		QTreeWidget* pTWidget = treeWidget();
 		if (pTWidget != nullptr)
-		{
 			pTWidget->setCurrentItem(this, QItemSelectionModel::Rows);
-		}
+		break;
+	}
+
+	case QEvent::Wheel:
+		return true;
 	}
 	return false;
 }
