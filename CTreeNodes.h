@@ -138,8 +138,11 @@ class CListGroup : public CGroupNode
 public:
 	// parameters: key, file dialog setting, parent node
 	CListGroup(const QString& sKey, const SFileDialogSetting &sFDS, CTreeNode* pParent);
+	virtual bool load(const QString& sFilename);
 	virtual bool read(const QJsonObject& rJsonNode) override;
 	virtual bool write(QJsonObject& rJsonNode) const override;
+
+	void setLoadFromJsonFile();
 	// return a sub item node, recommand to base on CListItemNode
 	virtual CTreeNode* addListItem();
 

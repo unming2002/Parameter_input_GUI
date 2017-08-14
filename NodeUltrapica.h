@@ -3,6 +3,9 @@
 #include "CTreeNodes.h"
 
 #include <array>
+#include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
 #include <QPushButton>
 #include <QMessageBox>
 
@@ -11,8 +14,9 @@
 
 static const SFileDialogSetting gDisableFileSelect = {false, "", "", ""};
 static const SFileDialogSetting gMeshFileSetting = { true, QObject::tr("Select a mesh file"), "", QObject::tr("Mesh file (*.uns);;All files (*.* *)") };
-static const SFileDialogSetting gBoundaryFileSetting = { true, QObject::tr("Select a boundary file"), "", QObject::tr("Boundary file (*.inp);;All files (*.* *)") };
+static const SFileDialogSetting gBoundaryFileSetting = { true, QObject::tr("Select a boundary file"), "", QObject::tr("Boundary file (*.json);;All files (*.* *)") };
 static const SFileDialogSetting gMoleculeFileSetting = { true, QObject::tr("Select a molecule file"), "", QObject::tr("Molecule file (*.*);;All files (*.* *)") };
+static const SFileDialogSetting gCollisionGroupFileSetting = { true, QObject::tr("Select a collision group file"), "", QObject::tr("Collision Group file (*.json);;All files (*.* *)") };
 
 #endif
 
@@ -39,12 +43,7 @@ public:
 		public:
 			CBoundaryTable(CTreeNode* pParent) : CListGroup("boundary_table", gBoundaryFileSetting, pParent)
 			{
-				//TODO: load boundary table
-				CBoundaryTable* pThis = this;
-				QObject::connect(this, &CListGroup::fileSelected, [pThis](const QString& sFilename)
-				{
-					QMessageBox::information(0,"Test", sFilename);
-				});
+				setLoadFromJsonFile();
 			}
 
 			CTreeNode* addListItem() override
@@ -76,7 +75,7 @@ public:
 			new CFileSelectNode("meshfile", "", gMeshFileSetting, this);
 
 			new CBoundaryTable(this);
-            //--new CAutoGenHexGrid(this);
+			//--new CAutoGenHexGrid(this);
 
 			new CDoubleNode("scale", 1.0, 4, { 0,10000,1 }, this);
 			new CDoubleNode("reference_cell_volume", 0.000000000001, 13, { 0,10000,0 }, this);
@@ -201,7 +200,10 @@ public:
 			};
 
 		public:
-			CCollisionGroup(CTreeNode* pParent) : CListGroup("collision_group", gDisableFileSelect, pParent) {}
+			CCollisionGroup(CTreeNode* pParent) : CListGroup("collision_group", gCollisionGroupFileSetting, pParent)
+			{
+				setLoadFromJsonFile();
+			}
 
 			CTreeNode* addListItem() override
 			{
@@ -239,25 +241,20 @@ public:
 				{
 					new CStringNode("name", "", this);
 					new CDoubleNode("mass_amu", 0, 4, { 0,1000,1 }, this);
-                    new CDoubleNode("charge", 0, 4, { -1000,1000,1 }, this);
-                    new CDoubleNode("T_eV", 0, 4, { 0,1000,1 }, this);
-                    new CDoubleNode("num_den", 0, 4, { 0,1000,1 }, this);
-                    new CDoubleNode("p_in_torr", 0, 4, { 0,1000,1 }, this);
-                    new CIntegerNode("particle_per_cell", 0, { 0,1000,1 }, this);
-                    new CIntegerNode("subcycling", 0, { 0,1000,1 }, this);
-                    new CIntegerNode("weighting", 0, { 0,1000,1 }, this);
-                }
+					new CDoubleNode("charge", 0, 4, { -1000,1000,1 }, this);
+					new CDoubleNode("T_eV", 0, 4, { 0,1000,1 }, this);
+					new CDoubleNode("num_den", 0, 4, { 0,1000,1 }, this);
+					new CDoubleNode("p_in_torr", 0, 4, { 0,1000,1 }, this);
+					new CIntegerNode("particle_per_cell", 0, { 0,1000,1 }, this);
+					new CIntegerNode("subcycling", 0, { 0,1000,1 }, this);
+					new CIntegerNode("weighting", 0, { 0,1000,1 }, this);
+				}
 			};
 
 		public:
 			CMolecule(CTreeNode* pParent) : CListGroup("molecule", gMoleculeFileSetting, pParent)
 			{
-				//TODO: load boundary table
-				CMolecule* pThis = this;
-				QObject::connect(this, &CListGroup::fileSelected, [pThis](const QString& sFilename)
-				{
-					QMessageBox::information(nullptr, "Test", sFilename);
-				});
+				setLoadFromJsonFile();
 			}
 
 			CTreeNode* addListItem() override
@@ -302,7 +299,7 @@ public:
 
 	public:
 		CMolecule*	m_pMolecule;
-        //CInitial*	m_pInitial;
+		//CInitial*	m_pInitial;
 	};
 
 	class CPoisson : public CGroupNode
@@ -317,7 +314,7 @@ public:
 				CItem(CTreeNode* pParent) : CListItemNode(pParent)
 				{
 					new CStringNode("name", "", this);
-                    new CComboBoxNode("type", {"SIN","COS","GROUND","NEUMANN"},0,this);
+					new CComboBoxNode("type", {"SIN","COS","GROUND","NEUMANN"},0,this);
 					new CDoubleNode("voltage", 0, 4, { 0,1000,1 }, this);
 					new CDoubleNode("frequency", 1.36E+7, 2, { 0,1E+8,1 }, this);
 					new CDoubleNode("phaseShift", 0, 4, { 0,1000,1 }, this);
@@ -326,7 +323,10 @@ public:
 			};
 
 		public:
-			CBoundary(CTreeNode* pParent) : CListGroup("boundary", gBoundaryFileSetting, pParent){}
+			CBoundary(CTreeNode* pParent) : CListGroup("boundary", gBoundaryFileSetting, pParent)
+			{
+				setLoadFromJsonFile();
+			}
 
 			CTreeNode* addListItem() override
 			{

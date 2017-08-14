@@ -8,12 +8,14 @@
 #include <QFileDialog>
 #include <QLayout>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QTextDocument>
 #include <QTextEdit>
 #include <QSpinBox>
 
 #include <QJsonArray>
+#include <QJsonDocument>
 
 #pragma region Functions of CStringNode
 CStringNode::CStringNode(const QString & sKey, const QString & sText, CTreeNode * pParent)
@@ -308,6 +310,39 @@ CListGroup::CListGroup(const QString & sKey, const SFileDialogSetting &sFDS, CTr
 	});
 }
 
+bool CListGroup::load(const QString & sFilename)
+{
+	bool bOK = false;
+	QFile loadFile(sFilename);
+	if (loadFile.open(QIODevice::ReadOnly))
+	{
+		// Load JSON File
+		QByteArray saveData = loadFile.readAll();
+		QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
+		if (!loadDoc.isNull())
+		{
+			QJsonObject mJsonObj = loadDoc.object();
+			if (mJsonObj.contains(getKey()))
+			{
+				bOK = true;
+				QJsonArray mThisNode = mJsonObj[getKey()].toArray();
+				for (auto rItem : mThisNode)
+				{
+					CTreeNode* pNode = addListItem();
+					if (!pNode->read(rItem.toObject()))
+						bOK = false;
+				}
+			}
+		}
+	}
+
+	if (!bOK)
+	{
+		QMessageBox::warning(nullptr, QObject::tr("File format warning"), QObject::tr("There are some format error in this file"));
+	}
+	return bOK;
+}
+
 bool CListGroup::read(const QJsonObject & rJsonNode)
 {
 	while (childCount() > 0)
@@ -332,6 +367,15 @@ bool CListGroup::write(QJsonObject & rJsonNode) const
 	});
 	rJsonNode[getKey()] = mThisNode;
 	return true;
+}
+
+void CListGroup::setLoadFromJsonFile()
+{
+	CListGroup* pThis = this;
+	QObject::connect(this, &CListGroup::fileSelected, [pThis](const QString& sFilename)
+	{
+		pThis->load(sFilename);
+	});
 }
 
 CTreeNode* CListGroup::addListItem()
