@@ -1,20 +1,11 @@
 #pragma once
 
+#include "common.h"
 #include "CTreeNodes.h"
 
 #include <array>
 #include <QPushButton>
 #include <QMessageBox>
-
-#ifndef FileDialog_h
-#define FileDialog_h
-
-static const SFileDialogSetting gDisableFileSelect = {false, "", "", ""};
-static const SFileDialogSetting gMeshFileSetting = { true, QObject::tr("Select a mesh file"), "", QObject::tr("Mesh file (*.uns);;All files (*.* *)") };
-static const SFileDialogSetting gBoundaryFileSetting = { true, QObject::tr("Select a boundary file"), "", QObject::tr("Boundary file (*.inp);;All files (*.* *)") };
-static const SFileDialogSetting gMoleculeFileSetting = { true, QObject::tr("Select a molecule file"), "", QObject::tr("Molecule file (*.*);;All files (*.* *)") };
-
-#endif
 
 class CUltraUtility : public CGroupNode
 {

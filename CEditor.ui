@@ -53,16 +53,69 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="groupBoxSettingIO">
+         <property name="title">
+          <string>Settings</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QPushButton" name="pbLoadFile">
+            <property name="text">
+             <string>Load</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbSaveFile">
+            <property name="text">
+             <string>Save</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxProject">
          <property name="minimumSize">
           <size>
            <width>220</width>
-           <height>220</height>
+           <height>0</height>
           </size>
          </property>
          <property name="title">
           <string>Project Setting</string>
          </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCheckBox" name="cbBasic">
+            <property name="text">
+             <string>Show Basic</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbAdvance">
+            <property name="text">
+             <string>Show Advance</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbExpert">
+            <property name="text">
+             <string>Show Expert</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbAll">
+            <property name="text">
+             <string>Show All</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
@@ -90,8 +143,110 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>cbBasic</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CEditor</receiver>
+   <slot>slotShowBasic(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>556</x>
+     <y>502</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbAdvance</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CEditor</receiver>
+   <slot>slotShowAdvance(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>556</x>
+     <y>525</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbExpert</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CEditor</receiver>
+   <slot>slotShowExpert(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>556</x>
+     <y>548</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbAll</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CEditor</receiver>
+   <slot>slotShowAll(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>556</x>
+     <y>571</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbLoadFile</sender>
+   <signal>clicked()</signal>
+   <receiver>CEditor</receiver>
+   <slot>slotLoadFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>469</x>
+     <y>443</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbSaveFile</sender>
+   <signal>clicked()</signal>
+   <receiver>CEditor</receiver>
+   <slot>slotSaveFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>643</x>
+     <y>443</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>slotItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)</slot>
+  <slot>slotShowBasic(bool)</slot>
+  <slot>slotShowAdvance(bool)</slot>
+  <slot>slotShowExpert(bool)</slot>
+  <slot>slotShowAll(bool)</slot>
+  <slot>slotLoadFile()</slot>
+  <slot>slotSaveFile()</slot>
  </slots>
 </ui>

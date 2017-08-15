@@ -1,11 +1,12 @@
 #include "CEditor.h"
+#include "common.h"
 
 CEditor::CEditor(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
 
-    //ui.treeWidget->setWindowTitle(QStringList() << "Key");
+	//ui.treeWidget->setWindowTitle(QStringList() << "Key");
 
 	#pragma region Header setting
 	{
@@ -40,9 +41,49 @@ void CEditor::setDataTree(CTreeNode * pNode)
 	}
 }
 
+void CEditor::slotShowBasic(bool)
+{
+	//TODO
+}
+
+void CEditor::slotShowAdvance(bool)
+{
+	//TODO
+}
+
+void CEditor::slotShowExpert(bool)
+{
+	//TODO
+}
+
+void CEditor::slotShowAll(bool)
+{
+	//TODO
+}
+
+void CEditor::slotLoadFile()
+{
+	loadJsonFileHelper([this](const QJsonObject& mJsonObj) {
+		CTreeNode* pNode = getTree();
+		if(pNode!=nullptr)
+			return pNode->read(mJsonObj);
+	});
+}
+
+void CEditor::slotSaveFile()
+{
+	CTreeNode* pNode = getTree();
+	if (pNode != nullptr)
+	{
+		QJsonObject mJsonObj;
+		pNode->write(mJsonObj);
+		saveJsonFileHelper(mJsonObj);
+	}
+}
+
 void CEditor::closeEvent(QCloseEvent*)
 {
-	CTreeNode* pNode = (CTreeNode*)ui.treeWidget->topLevelItem(0);
+	CTreeNode* pNode = getTree();
 	if (pNode != nullptr)
 	{
 		QTreeWidget* pTreeWidget = ui.treeWidget;

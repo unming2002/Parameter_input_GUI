@@ -19,12 +19,23 @@ public:
 
 private:
 	Ui::CEditor ui;
+	CTreeNode*	m_pTree;
 
 public slots:
 	// The slot used to update information panel, show been trigger when the selected item changed
 	void slotItemChanged(QTreeWidgetItem* pCurrent, QTreeWidgetItem* pPrevious);
+	void slotShowBasic(bool);
+	void slotShowAdvance(bool);
+	void slotShowExpert(bool);
+	void slotShowAll(bool);
+	void slotLoadFile();
+	void slotSaveFile();
 
 protected:
 	// clear dynmamatic created, linked resource
 	void closeEvent(QCloseEvent *event) override;
+	CTreeNode* getTree()
+	{
+		return (CTreeNode*)ui.treeWidget->topLevelItem(0);
+	}
 };
