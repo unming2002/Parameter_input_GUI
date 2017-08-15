@@ -68,7 +68,7 @@ public:
 			//--new CAutoGenHexGrid(this);
 
 			new CDoubleNode("scale", 1.0, 4, { 0,10000,1 }, this);
-			new CDoubleNode("reference_cell_volume", 0.000000000001, 13, { 0,10000,0 }, this);
+			new CScientificNode("reference_cell_volume", 1e-13, 13, { 0,10000,1e-13 }, this);
 		}
 	};
 

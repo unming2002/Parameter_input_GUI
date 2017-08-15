@@ -4,6 +4,7 @@
 
 #include <QComboBox>
 #include <QDoubleSpinBox>
+#include <QDoubleValidator>
 #include <QEvent>
 #include <QFileDialog>
 #include <QLayout>
@@ -104,6 +105,60 @@ bool CDoubleNode::read(const QJsonObject & rJsonNode)
 bool CDoubleNode::write(QJsonObject & rJsonNode) const
 {
 	rJsonNode[getKey()] = m_pDoubleEdit->value();
+	return true;
+}
+#pragma endregion
+
+#pragma region Functions of QScientificSpinBox
+class QScientificSpinBox : public QDoubleSpinBox
+{
+public:
+	virtual QString textFromValue(double value) const
+	{
+		return QString("%1").arg(value);
+	}
+
+	virtual QValidator::State validate(QString &text, int &pos) const
+	{
+		return m_Validator.validate(text, pos);
+	}
+
+	virtual void stepBy(int steps)
+	{
+		setValue(value() + steps * singleStep());
+	}
+
+protected:
+	QDoubleValidator m_Validator;
+};
+
+CScientificNode::CScientificNode(const QString & sKey, const double & iValue, const int & iDecimal, TValueLimit<double> mLimit, CTreeNode * pParent)
+	: CTreeNode(sKey, pParent)
+{
+	m_pValueEdit = new QScientificSpinBox();
+	m_pValueEdit->installEventFilter(this);
+	m_pValueEditor->layout()->addWidget(m_pValueEdit);
+
+	m_pValueEdit->setDecimals(iDecimal);
+	m_pValueEdit->setRange(mLimit.mMin, mLimit.mMax);
+	m_pValueEdit->setValue(iValue);
+	m_pValueEdit->setSingleStep(mLimit.mStep);
+
+	m_sValueOptions << QString("Default value: %1").arg(iValue)
+		<< QString("Minimum: %1").arg(mLimit.mMin)
+		<< QString("Maximum: %1").arg(mLimit.mMax);
+	setInfoDocument("Input integer value");
+}
+
+bool CScientificNode::read(const QJsonObject & rJsonNode)
+{
+	m_pValueEdit->setValue(rJsonNode[getKey()].toDouble(m_pValueEdit->value()));
+	return true;
+}
+
+bool CScientificNode::write(QJsonObject & rJsonNode) const
+{
+	rJsonNode[getKey()] = m_pValueEdit->value();
 	return true;
 }
 #pragma endregion

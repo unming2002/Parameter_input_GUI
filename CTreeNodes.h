@@ -9,6 +9,7 @@ class QDoubleSpinBox;
 class QLineEdit;
 class QPushButton;
 class QSpinBox;
+class QScientificSpinBox;
 
 // A helper structure for CIntegerNode and CDoubleNode
 template<typename DType>
@@ -60,11 +61,24 @@ class CDoubleNode : public CTreeNode
 public:
 	// parameters: key, default value, decimal to use, limits and step, parent node
 	CDoubleNode(const QString& sKey, const double& iValue, const int& iDecimal, TValueLimit<double> mLimit, CTreeNode* pParent);
+	virtual bool read(const QJsonObject & rJsonNode) override;
+	virtual bool write(QJsonObject & rJsonNode) const override;
+
+public:
+	QDoubleSpinBox*	m_pDoubleEdit;
+};
+
+// The node for scientific notation value
+class CScientificNode : public CTreeNode
+{
+public:
+	// parameters: key, default value, decimal to use, limits and step, parent node
+	CScientificNode(const QString& sKey, const double& iValue, const int& iDecimal, TValueLimit<double> mLimit, CTreeNode* pParent);
 	bool read(const QJsonObject & rJsonNode) override;
 	bool write(QJsonObject & rJsonNode) const override;
 
 public:
-	QDoubleSpinBox*	m_pDoubleEdit;
+	QScientificSpinBox*	m_pValueEdit;
 };
 
 // General case for multiple options value
