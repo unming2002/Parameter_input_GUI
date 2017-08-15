@@ -18,22 +18,19 @@ CMain::CMain(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	// First layer node
-	m_pRootNode = new CGroupNode("p3_multiphysics", nullptr);
-
 	// Groupped nodes
 	{
-		m_mapGroups["ultrautility"] = { new CUltraUtility(m_pRootNode),ui.butUtility };
+		m_mapGroups["ultrautility"] = { new CUltraUtility(nullptr),ui.butUtility };
 
-		m_mapGroups["ultrapica"] = { new CUltrapica(m_pRootNode), ui.butPICA };
+		m_mapGroups["ultrapica"] = { new CUltrapica(nullptr), ui.butPICA };
 
-		m_mapGroups["ultrasparts"] = { new CUltrasparts(m_pRootNode), ui.butSPARTS };
+		m_mapGroups["ultrasparts"] = { new CUltrasparts(nullptr), ui.butSPARTS };
 
 		//TODO: undefined groups, replace "CGroupNode" with well-defined data class
-		m_mapGroups["ultraflumod"] = { new CGroupNode("ultraflumod", m_pRootNode), ui.butFluMod };
-		m_mapGroups["UltraNSMod"] = { new CGroupNode("UltraNSMod", m_pRootNode), ui.butNSMod };
-		m_mapGroups["UltraProfiling"] = { new CGroupNode("UltraProfiling", m_pRootNode),ui.butProfiling };
-		m_mapGroups["UltraChemRateMod"] = { new CGroupNode("UltraChemRateMod", m_pRootNode), ui.butChemRateMod };
+		m_mapGroups["ultraflumod"] = { new CGroupNode("ultraflumod", nullptr), ui.butFluMod };
+		m_mapGroups["UltraNSMod"] = { new CGroupNode("UltraNSMod", nullptr), ui.butNSMod };
+		m_mapGroups["UltraProfiling"] = { new CGroupNode("UltraProfiling", nullptr),ui.butProfiling };
+		m_mapGroups["UltraChemRateMod"] = { new CGroupNode("UltraChemRateMod", nullptr), ui.butChemRateMod };
 	}
 
 	m_pEditor = new CEditor();
@@ -43,8 +40,6 @@ CMain::CMain(QWidget *parent)
 	for (auto& rItem : m_mapGroups)
 	{
 		CTreeNode* pNode = rItem.second.pTreeNode;
-
-		m_pRootNode->removeChild(pNode);
 
 		connect(rItem.second.pButton, &QPushButton::clicked, [pEditor, pNode]() {
 			pEditor->setDataTree(pNode);
@@ -62,43 +57,17 @@ CMain::CMain(QWidget *parent)
 void CMain::slotLoadProject()
 {
 	loadJsonFileHelper([this](const QJsonObject& mJsonObj) {
-		// Get first layer node (root)
-		//if (mJsonObj.contains("p3_multiphysics"))
-		//{
-		// setup full data tree
-		for (auto& it : mJsonObj.keys())
-		{
-			if (m_mapGroups.find(it.toUtf8().constData()) != m_mapGroups.end())
-			{
-				m_mapGroups[it.toUtf8().constData()].pTreeNode->read(mJsonObj);
-			}
-			else
-			{
-				std::cout << "Unknown key value:" << it.toUtf8().constData() << endl;
-			}
-		}
-
-		for (auto& rItem : m_mapGroups)
-			m_pRootNode->addChild(rItem.second.pTreeNode);
-
-
-		// read all data
-		//m_pRootNode->read(mJsonObj);
-
-		//QJsonObject mSubNode = mJsonObj["p3_multiphysics"].toObject();
-
-		QJsonObject mSubNode = mJsonObj;
-
-		// check if grouped node existed
 		for (auto& rItem : m_mapGroups)
 		{
-			if (mSubNode.contains(rItem.first.c_str()))
+			if (mJsonObj.contains(rItem.first))
+			{
 				rItem.second.pButton->show();
+				rItem.second.pTreeNode->read(mJsonObj);
+			}
 			else
+			{
 				rItem.second.pButton->hide();
-
-			// need to remove from parent for used in QTreeWidget
-			m_pRootNode->removeChild(rItem.second.pTreeNode);
+			}
 		}
 
 		return true; //TODO: check if file is correct
@@ -114,18 +83,9 @@ void CMain::slotSaveProject()
 	// construct data tree that visible
 	for (auto& rItem : m_mapGroups)
 	{
-		// re-add to root node for write
-		if (!rItem.second.pButton->isHidden())
-			m_pRootNode->addChild(rItem.second.pTreeNode);
-
 		if (!rItem.second.pButton->isHidden())
 			rItem.second.pTreeNode->write(mObj);
 	}
-
-	// m_pRootNode->write(mObj);
-
-	for (auto& rItem : m_mapGroups)
-		m_pRootNode->removeChild(rItem.second.pTreeNode);
 
 	saveJsonFileHelper(mObj);
 }

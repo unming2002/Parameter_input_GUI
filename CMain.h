@@ -36,8 +36,7 @@ protected:
 
 protected:
 	CEditor*	m_pEditor;		// Editor window
-	CTreeNode*	m_pRootNode;	// root of JSON data tree
-	std::map<std::string, SMainGroup>	m_mapGroups;	// groups mapiing of JSON
+	std::map<QString, SMainGroup>	m_mapGroups;	// groups mapiing of JSON
 
 private:
 	Ui::CMainClass ui;
