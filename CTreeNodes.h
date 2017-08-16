@@ -34,7 +34,7 @@ class CStringNode : public CTreeNode
 {
 public:
 	// parameters: key, default value, parent node
-	CStringNode(const QString& sKey, const QString& sText, CTreeNode* pParent);
+	CStringNode(const QString& sKey, const EGroup& eGroup, const QString& sText, CTreeNode* pParent);
 	virtual bool read(const QJsonObject& rJsonNode) override;
 	virtual bool write(QJsonObject& rJsonNode) const override;
 
@@ -47,7 +47,7 @@ class CIntegerNode : public CTreeNode
 {
 public:
 	// parameters: key, default value, limits and step, parent node
-	CIntegerNode(const QString& sKey, const int& iValue, TValueLimit<int> mLimit, CTreeNode* pParent);
+	CIntegerNode(const QString& sKey, const EGroup& eGroup, const int& iValue, TValueLimit<int> mLimit, CTreeNode* pParent);
 	bool read(const QJsonObject & rJsonNode) override;
 	bool write(QJsonObject & rJsonNode) const override;
 
@@ -60,7 +60,7 @@ class CDoubleNode : public CTreeNode
 {
 public:
 	// parameters: key, default value, decimal to use, limits and step, parent node
-	CDoubleNode(const QString& sKey, const double& iValue, const int& iDecimal, TValueLimit<double> mLimit, CTreeNode* pParent);
+	CDoubleNode(const QString& sKey, const EGroup& eGroup, const double& iValue, const int& iDecimal, TValueLimit<double> mLimit, CTreeNode* pParent);
 	virtual bool read(const QJsonObject & rJsonNode) override;
 	virtual bool write(QJsonObject & rJsonNode) const override;
 
@@ -73,7 +73,7 @@ class CScientificNode : public CTreeNode
 {
 public:
 	// parameters: key, default value, decimal to use, limits and step, parent node
-	CScientificNode(const QString& sKey, const double& iValue, const int& iDecimal, TValueLimit<double> mLimit, CTreeNode* pParent);
+	CScientificNode(const QString& sKey, const EGroup& eGroup, const double& iValue, const int& iDecimal, TValueLimit<double> mLimit, CTreeNode* pParent);
 	bool read(const QJsonObject & rJsonNode) override;
 	bool write(QJsonObject & rJsonNode) const override;
 
@@ -86,7 +86,7 @@ class CComboBoxNode : public CTreeNode
 {
 public:
 	// parameters: key, option list, default index, parent node
-	CComboBoxNode(const QString& sKey, const QStringList& aOptions, int iDefaultOption, CTreeNode* pParent);
+	CComboBoxNode(const QString& sKey, const EGroup& eGroup, const QStringList& aOptions, int iDefaultOption, CTreeNode* pParent);
 	virtual bool read(const QJsonObject& rJsonNode) override;
 	virtual bool write(QJsonObject& rJsonNode) const override;
 
@@ -99,8 +99,8 @@ class CBooleanNode : public CComboBoxNode
 {
 public:
 	// parameters: key, default value, parent node
-	CBooleanNode(const QString& sKey, bool bDefaultValue, CTreeNode* pParent)
-		: CComboBoxNode(sKey, QStringList() << "True" << "False", (bDefaultValue ? 0 : 1), pParent){}
+	CBooleanNode(const QString& sKey, const EGroup& eGroup, bool bDefaultValue, CTreeNode* pParent)
+		: CComboBoxNode(sKey, eGroup, QStringList() << "True" << "False", (bDefaultValue ? 0 : 1), pParent){}
 
 	virtual bool read(const QJsonObject& rJsonNode) override;
 	virtual bool write(QJsonObject& rJsonNode) const override;
@@ -111,7 +111,7 @@ class CFileSelectNode : public CStringNode
 {
 public:
 	// parameters: key, default value, file dialog setting, parent node
-	CFileSelectNode(const QString& sKey, const QString& sDefaultName, const SFileDialogSetting &sFDS, CTreeNode* pParent);
+	CFileSelectNode(const QString& sKey, const EGroup& eGroup, const QString& sDefaultName, const SFileDialogSetting &sFDS, CTreeNode* pParent);
 };
 
 // Simple type list node, support int, double, QString
@@ -121,7 +121,7 @@ class CValueListNode : public CTreeNode
 {
 public:
 	// parameters: key, a list of values, parent node
-	CValueListNode(const QString& sKey, const QVector<QStringRef>& rList, CTreeNode* pParent);
+	CValueListNode(const QString& sKey, const EGroup& eGroup, const QVector<QStringRef>& rList, CTreeNode* pParent);
 	virtual bool read(const QJsonObject& rJsonNode) override;
 	virtual bool write(QJsonObject& rJsonNode) const override;
 
@@ -138,7 +138,7 @@ class CGroupNode : public CTreeNode
 {
 public:
 	// parameters: key, parent node
-	CGroupNode(const QString& sKey, CTreeNode* pParent) : CTreeNode(sKey, pParent){}
+	CGroupNode(const QString& sKey, const EGroup& eGroup, CTreeNode* pParent) : CTreeNode(sKey, eGroup, pParent){}
 	virtual bool read(const QJsonObject& rJsonNode) override;
 	virtual bool write(QJsonObject& rJsonNode) const override;
 };
@@ -151,7 +151,7 @@ class CListGroup : public CGroupNode
 
 public:
 	// parameters: key, file dialog setting, parent node
-	CListGroup(const QString& sKey, const SFileDialogSetting &sFDS, CTreeNode* pParent);
+	CListGroup(const QString& sKey, const EGroup& eGroup, const SFileDialogSetting &sFDS, CTreeNode* pParent);
 	virtual bool load(const QString& sFilename);
 	virtual bool read(const QJsonObject& rJsonNode) override;
 	virtual bool write(QJsonObject& rJsonNode) const override;

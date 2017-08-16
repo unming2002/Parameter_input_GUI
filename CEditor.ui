@@ -92,12 +92,18 @@
             <property name="text">
              <string>Show Basic</string>
             </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="cbAdvance">
             <property name="text">
              <string>Show Advance</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -106,12 +112,18 @@
             <property name="text">
              <string>Show Expert</string>
             </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="cbAll">
             <property name="text">
              <string>Show All</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -145,9 +157,9 @@
   </connection>
   <connection>
    <sender>cbBasic</sender>
-   <signal>clicked(bool)</signal>
+   <signal>clicked()</signal>
    <receiver>CEditor</receiver>
-   <slot>slotShowBasic(bool)</slot>
+   <slot>slotShowBasic()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>556</x>
@@ -161,9 +173,9 @@
   </connection>
   <connection>
    <sender>cbAdvance</sender>
-   <signal>clicked(bool)</signal>
+   <signal>clicked()</signal>
    <receiver>CEditor</receiver>
-   <slot>slotShowAdvance(bool)</slot>
+   <slot>slotShowAdvance()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>556</x>
@@ -177,9 +189,9 @@
   </connection>
   <connection>
    <sender>cbExpert</sender>
-   <signal>clicked(bool)</signal>
+   <signal>clicked()</signal>
    <receiver>CEditor</receiver>
-   <slot>slotShowExpert(bool)</slot>
+   <slot>slotShowExpert()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>556</x>
@@ -193,9 +205,9 @@
   </connection>
   <connection>
    <sender>cbAll</sender>
-   <signal>clicked(bool)</signal>
+   <signal>clicked()</signal>
    <receiver>CEditor</receiver>
-   <slot>slotShowAll(bool)</slot>
+   <slot>slotShowAll()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>556</x>
@@ -242,10 +254,10 @@
  </connections>
  <slots>
   <slot>slotItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)</slot>
-  <slot>slotShowBasic(bool)</slot>
-  <slot>slotShowAdvance(bool)</slot>
-  <slot>slotShowExpert(bool)</slot>
-  <slot>slotShowAll(bool)</slot>
+  <slot>slotShowBasic()</slot>
+  <slot>slotShowAdvance()</slot>
+  <slot>slotShowExpert()</slot>
+  <slot>slotShowAll()</slot>
   <slot>slotLoadFile()</slot>
   <slot>slotSaveFile()</slot>
  </slots>

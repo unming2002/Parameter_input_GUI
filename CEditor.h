@@ -24,10 +24,10 @@ private:
 public slots:
 	// The slot used to update information panel, show been trigger when the selected item changed
 	void slotItemChanged(QTreeWidgetItem* pCurrent, QTreeWidgetItem* pPrevious);
-	void slotShowBasic(bool);
-	void slotShowAdvance(bool);
-	void slotShowExpert(bool);
-	void slotShowAll(bool);
+	void slotShowBasic();
+	void slotShowAdvance();
+	void slotShowExpert();
+	void slotShowAll();
 	void slotLoadFile();
 	void slotSaveFile();
 
@@ -38,4 +38,6 @@ protected:
 	{
 		return (CTreeNode*)ui.treeWidget->topLevelItem(0);
 	}
+
+	void updateShowAllStatus();
 };

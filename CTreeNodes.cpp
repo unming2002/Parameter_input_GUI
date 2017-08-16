@@ -19,8 +19,8 @@
 #include <QJsonDocument>
 
 #pragma region Functions of CStringNode
-CStringNode::CStringNode(const QString & sKey, const QString & sText, CTreeNode * pParent)
-	: CTreeNode(sKey, pParent)
+CStringNode::CStringNode(const QString& sKey, const EGroup& eGroup, const QString & sText, CTreeNode * pParent)
+	: CTreeNode(sKey, eGroup, pParent)
 {
 	m_pTextEdit = new QLineEdit(sText);
 	m_pTextEdit->installEventFilter(this);
@@ -47,8 +47,8 @@ bool CStringNode::write(QJsonObject & rJsonNode) const
 #pragma endregion
 
 #pragma region Functions of CIntegerNode
-CIntegerNode::CIntegerNode(const QString & sKey, const int & iValue, TValueLimit<int> mLimit, CTreeNode * pParent)
-	: CTreeNode(sKey, pParent)
+CIntegerNode::CIntegerNode(const QString& sKey, const EGroup& eGroup, const int & iValue, TValueLimit<int> mLimit, CTreeNode * pParent)
+	: CTreeNode(sKey, eGroup, pParent)
 {
 	m_pIntegerEdit = new QSpinBox();
 	m_pIntegerEdit->installEventFilter(this);
@@ -78,8 +78,8 @@ bool CIntegerNode::write(QJsonObject & rJsonNode) const
 #pragma endregion
 
 #pragma region Functions of CDoubleNode
-CDoubleNode::CDoubleNode(const QString & sKey, const double & iValue, const int& iDecimal, TValueLimit<double> mLimit, CTreeNode * pParent)
-	: CTreeNode(sKey, pParent)
+CDoubleNode::CDoubleNode(const QString& sKey, const EGroup& eGroup, const double & iValue, const int& iDecimal, TValueLimit<double> mLimit, CTreeNode * pParent)
+	: CTreeNode(sKey, eGroup, pParent)
 {
 	m_pDoubleEdit = new QDoubleSpinBox();
 	m_pDoubleEdit->installEventFilter(this);
@@ -132,8 +132,8 @@ protected:
 	QDoubleValidator m_Validator;
 };
 
-CScientificNode::CScientificNode(const QString & sKey, const double & iValue, const int & iDecimal, TValueLimit<double> mLimit, CTreeNode * pParent)
-	: CTreeNode(sKey, pParent)
+CScientificNode::CScientificNode(const QString& sKey, const EGroup& eGroup, const double & iValue, const int & iDecimal, TValueLimit<double> mLimit, CTreeNode * pParent)
+	: CTreeNode(sKey, eGroup, pParent)
 {
 	m_pValueEdit = new QScientificSpinBox();
 	m_pValueEdit->installEventFilter(this);
@@ -164,8 +164,8 @@ bool CScientificNode::write(QJsonObject & rJsonNode) const
 #pragma endregion
 
 #pragma region Functions of CComboBoxNode
-CComboBoxNode::CComboBoxNode(const QString & sKey, const QStringList & aOptions, int iDefaultOption, CTreeNode * pParent)
-	: CTreeNode(sKey, pParent)
+CComboBoxNode::CComboBoxNode(const QString& sKey, const EGroup& eGroup, const QStringList & aOptions, int iDefaultOption, CTreeNode * pParent)
+	: CTreeNode(sKey, eGroup, pParent)
 {
 	m_pComboBox = new QComboBox();
 	m_pComboBox->installEventFilter(this);
@@ -206,8 +206,8 @@ bool CBooleanNode::write(QJsonObject & rJsonNode) const
 #pragma endregion
 
 #pragma region Functions of CFileSelectNode
-CFileSelectNode::CFileSelectNode(const QString & sKey, const QString & sDefaultName, const SFileDialogSetting &sFDS, CTreeNode * pParent)
-	: CStringNode(sKey, sDefaultName, pParent)
+CFileSelectNode::CFileSelectNode(const QString& sKey, const EGroup& eGroup, const QString & sDefaultName, const SFileDialogSetting &sFDS, CTreeNode * pParent)
+	: CStringNode(sKey, eGroup, sDefaultName, pParent)
 {
 	QPushButton* pOpenButton = new QPushButton("...");
 	pOpenButton->setFixedWidth(20);
@@ -229,8 +229,8 @@ CFileSelectNode::CFileSelectNode(const QString & sKey, const QString & sDefaultN
 
 #pragma region Functions of CValueListNode
 template<typename TYPE>
-CValueListNode<TYPE>::CValueListNode(const QString & sKey, const QVector<QStringRef>& rList, CTreeNode * pParent)
-	: CTreeNode(sKey, pParent)
+CValueListNode<TYPE>::CValueListNode(const QString& sKey, const EGroup& eGroup, const QVector<QStringRef>& rList, CTreeNode * pParent)
+	: CTreeNode(sKey, eGroup, pParent)
 {
 	m_pValueList = new QLineEdit();
 	m_pValueList->installEventFilter(this);
@@ -329,11 +329,11 @@ bool CGroupNode::write(QJsonObject & rJsonNode) const
 	rJsonNode[getKey()] = mThisNode;
 	return true;
 }
-
 #pragma endregion
 
 #pragma region Functions of CListGroup
-CListGroup::CListGroup(const QString & sKey, const SFileDialogSetting &sFDS, CTreeNode * pParent) : CGroupNode(sKey, pParent)
+CListGroup::CListGroup(const QString& sKey, const EGroup& eGroup, const SFileDialogSetting &sFDS, CTreeNode * pParent)
+	: CGroupNode(sKey, eGroup, pParent)
 {
 	CListGroup* pThis = this;
 	m_pValueEditor->setFixedWidth(90);
@@ -441,7 +441,8 @@ CTreeNode* CListGroup::addListItem()
 #pragma endregion
 
 #pragma region Functions of CListItemNode
-CListItemNode::CListItemNode(CTreeNode * pParent) : CGroupNode("<------------------------------------------------->", pParent)
+CListItemNode::CListItemNode(CTreeNode * pParent)
+	: CGroupNode("<------------------------------------------------->", NoGroup, pParent)
 {
 	m_pValueEditor->setFixedWidth(90);
 	QLayout* pLayout = m_pValueEditor->layout();

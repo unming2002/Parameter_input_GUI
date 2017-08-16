@@ -6,7 +6,7 @@
 #include <QTextEdit>
 
 #pragma region Functions of CTreeNode
-CTreeNode::CTreeNode(const QString& sKey, CTreeNode* pParent) : QTreeWidgetItem(pParent)
+CTreeNode::CTreeNode(const QString& sKey, const EGroup& eGroup, CTreeNode* pParent) : QTreeWidgetItem(pParent)
 {
 	// Set key value
 	setText(0, sKey);
@@ -27,6 +27,8 @@ CTreeNode::CTreeNode(const QString& sKey, CTreeNode* pParent) : QTreeWidgetItem(
 
 	// default information panel
 	m_pInforDocument = new QTextDocument();
+
+	m_eGroup = eGroup;
 }
 
 void CTreeNode::setInfoDocument(const QString & sTitle, const QString & sDesc, const QString & sOptions)
@@ -76,6 +78,14 @@ void CTreeNode::removeValueEditorFromTreeWidget()
 {
 	m_pValueEditor->parentWidget()->layout()->removeWidget(m_pValueEditor);
 	m_pValueEditor->setParent(nullptr);
+}
+
+void CTreeNode::hideNode(const EGroup & eGroup, bool bHide)
+{
+	forEachNode([eGroup, bHide](CTreeNode* pNode) {
+		if (pNode->m_eGroup == eGroup)
+			pNode->setHidden(bHide);
+	});
 }
 
 bool CTreeNode::eventFilter(QObject * obj, QEvent * pEvent)

@@ -12,7 +12,16 @@
 class CTreeNode : public QObject, public QTreeWidgetItem
 {
 public:
-	CTreeNode(const QString& sKey, CTreeNode* pParent);
+	enum EGroup
+	{
+		NoGroup,
+		BasicGroup,
+		AdvanceGroup,
+		ExpertGroup
+	};
+
+public:
+	CTreeNode(const QString& sKey, const EGroup& eGroup, CTreeNode* pParent);
 
 	// Helper function to apply a function to each nodes
 	template<typename FUNC>
@@ -80,11 +89,13 @@ public:
 
 	virtual void setValueEditorToTreeWidget();
 	virtual void removeValueEditorFromTreeWidget();
+	virtual void hideNode(const EGroup& eGroup, bool bHide);
 
 public:
 	QWidget*		m_pValueEditor;		// Widget to display, edit value
 	QTextDocument*	m_pInforDocument;	// Data to show in information panel
 	QStringList		m_sValueOptions;	// Helper data for setInfoDocument(), m_pInforDocument
+	EGroup			m_eGroup;			// Group tag to help controlling show/hide
 
 protected:
 	bool eventFilter(QObject *obj, QEvent *event);	// special event handler to make show the row is selected

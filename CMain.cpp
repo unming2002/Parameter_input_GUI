@@ -27,10 +27,10 @@ CMain::CMain(QWidget *parent)
 		m_mapGroups["ultrasparts"] = { new CUltrasparts(nullptr), ui.butSPARTS };
 
 		//TODO: undefined groups, replace "CGroupNode" with well-defined data class
-		m_mapGroups["ultraflumod"] = { new CGroupNode("ultraflumod", nullptr), ui.butFluMod };
-		m_mapGroups["UltraNSMod"] = { new CGroupNode("UltraNSMod", nullptr), ui.butNSMod };
-		m_mapGroups["UltraProfiling"] = { new CGroupNode("UltraProfiling", nullptr),ui.butProfiling };
-		m_mapGroups["UltraChemRateMod"] = { new CGroupNode("UltraChemRateMod", nullptr), ui.butChemRateMod };
+		m_mapGroups["ultraflumod"] = { new CGroupNode("ultraflumod", CTreeNode::NoGroup, nullptr), ui.butFluMod };
+		m_mapGroups["UltraNSMod"] = { new CGroupNode("UltraNSMod", CTreeNode::NoGroup, nullptr), ui.butNSMod };
+		m_mapGroups["UltraProfiling"] = { new CGroupNode("UltraProfiling", CTreeNode::NoGroup, nullptr),ui.butProfiling };
+		m_mapGroups["UltraChemRateMod"] = { new CGroupNode("UltraChemRateMod", CTreeNode::NoGroup, nullptr), ui.butChemRateMod };
 	}
 
 	m_pEditor = new CEditor();

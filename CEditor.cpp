@@ -41,24 +41,50 @@ void CEditor::setDataTree(CTreeNode * pNode)
 	}
 }
 
-void CEditor::slotShowBasic(bool)
+void CEditor::slotShowBasic()
 {
-	//TODO
+	getTree()->hideNode(CTreeNode::BasicGroup, !ui.cbBasic->isChecked());
+	updateShowAllStatus();
 }
 
-void CEditor::slotShowAdvance(bool)
+void CEditor::slotShowAdvance()
 {
-	//TODO
+	getTree()->hideNode(CTreeNode::AdvanceGroup, !ui.cbAdvance->isChecked());
+	updateShowAllStatus();
 }
 
-void CEditor::slotShowExpert(bool)
+void CEditor::slotShowExpert()
 {
-	//TODO
+	getTree()->hideNode(CTreeNode::ExpertGroup, !ui.cbExpert->isChecked());
+	updateShowAllStatus();
 }
 
-void CEditor::slotShowAll(bool)
+void CEditor::slotShowAll()
 {
-	//TODO
+	switch (ui.cbAll->checkState())
+	{
+	case Qt::Checked:
+		ui.cbBasic->setChecked(true);
+		ui.cbAdvance->setChecked(true);
+		ui.cbExpert->setChecked(true);
+		break;
+
+	case Qt::Unchecked:
+		ui.cbBasic->setChecked(false);
+		ui.cbAdvance->setChecked(false);
+		ui.cbExpert->setChecked(false);
+		break;
+
+	case Qt::PartiallyChecked:
+		ui.cbAll->setCheckState(Qt::Checked);
+		ui.cbBasic->setChecked(true);
+		ui.cbAdvance->setChecked(true);
+		ui.cbExpert->setChecked(true);
+	}
+
+	slotShowBasic();
+	slotShowAdvance();
+	slotShowExpert();
 }
 
 void CEditor::slotLoadFile()
@@ -67,6 +93,7 @@ void CEditor::slotLoadFile()
 		CTreeNode* pNode = getTree();
 		if(pNode!=nullptr)
 			return pNode->read(mJsonObj);
+		return false;
 	});
 }
 
@@ -92,6 +119,16 @@ void CEditor::closeEvent(QCloseEvent*)
 		});
 		ui.treeWidget->takeTopLevelItem(0);
 	}
+}
+
+void CEditor::updateShowAllStatus()
+{
+	if (ui.cbBasic->isChecked() && ui.cbAdvance->isChecked() && ui.cbExpert->isChecked())
+		ui.cbAll->setCheckState(Qt::Checked);
+	else if ((!ui.cbBasic->isChecked()) && (!ui.cbAdvance->isChecked()) && (!ui.cbExpert->isChecked()))
+		ui.cbAll->setCheckState(Qt::Unchecked);
+	else
+		ui.cbAll->setCheckState(Qt::PartiallyChecked);
 }
 
 void CEditor::slotItemChanged(QTreeWidgetItem* pCurrent, QTreeWidgetItem* pPrevious)
