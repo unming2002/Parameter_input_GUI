@@ -39,5 +39,6 @@ protected:
 		return (CTreeNode*)ui.treeWidget->topLevelItem(0);
 	}
 
+	void showEvent(QShowEvent *event);
 	void updateShowAllStatus();
 };

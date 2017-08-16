@@ -121,6 +121,15 @@ void CEditor::closeEvent(QCloseEvent*)
 	}
 }
 
+void CEditor::showEvent(QShowEvent *event)
+{
+	slotShowBasic();
+	slotShowAdvance();
+	slotShowExpert();
+
+	QWidget::showEvent(event);
+}
+
 void CEditor::updateShowAllStatus()
 {
 	if (ui.cbBasic->isChecked() && ui.cbAdvance->isChecked() && ui.cbExpert->isChecked())
